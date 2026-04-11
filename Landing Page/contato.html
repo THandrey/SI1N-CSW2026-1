@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Thiago Andrey — Contato</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Space+Mono:wght@400;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #f5f2ec;
+      --ink:   #0e0e0e;
+      --muted: #7a7570;
+      --accent:#c8401b;
+      --line:  rgba(14,14,14,0.12);
+      --serif: 'Playfair Display', Georgia, serif;
+      --mono:  'Space Mono', monospace;
+      --sans:  'Manrope', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background-color: var(--bg);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 48px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .menu { list-style: none; display: flex; gap: 36px; }
+    .menu a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .menu a:hover, .menu a.ativo { color: var(--accent); }
+
+    /* ─── LAYOUT ─── */
+    .contact-layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      padding-top: 61px; /* nav height */
+    }
+
+    /* ─── LEFT PANEL ─── */
+    .contact-info {
+      background: var(--ink);
+      padding: 80px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: sticky;
+      top: 61px;
+      height: calc(100vh - 61px);
+      overflow-y: auto;
+    }
+
+    .info-top { }
+
+    .info-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .info-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.05;
+      color: #fff;
+      margin-bottom: 32px;
+    }
+
+    .info-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .info-desc {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      max-width: 260px;
+    }
+
+    .info-bottom {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 32px;
+    }
+
+    .info-bottom p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .info-bottom a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── FORM PANEL ─── */
+    .contact-form-wrap {
+      padding: 80px 72px;
+      overflow-y: auto;
+    }
+
+    .form-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .field-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .field {
+      margin-bottom: 28px;
+    }
+
+    .field label {
+      display: block;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--line);
+      padding: 10px 0;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+      border-radius: 0;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(14,14,14,0.3);
+      font-size: 0.88rem;
+    }
+
+    .field textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    /* ─── FIELDSET ─── */
+    .form-group {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .form-group-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .radio-group, .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .radio-group label, .check-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    /* ─── DATE/TIME ─── */
+    .datetime-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    /* ─── BUTTONS ─── */
+    .form-actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .btn-submit {
+      background: var(--ink);
+      color: var(--bg);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none;
+      padding: 16px 36px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .btn-submit:hover { background: var(--accent); transform: translateY(-2px); }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1.5px solid var(--line);
+      padding: 16px 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-reset:hover { border-color: var(--muted); color: var(--ink); }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 24px 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    footer a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .menu { gap: 20px; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-info { position: relative; top: 0; height: auto; padding: 80px 24px 60px; }
+      .contact-form-wrap { padding: 60px 24px; }
+      .field-group { grid-template-columns: 1fr; }
+      .datetime-row { grid-template-columns: 1fr; }
+      footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+<link rel="shortcut icon" href="imagens/html.png" type="image/x-icon">
+  <nav>
+    <a href="index.html" class="nav-logo">TH<span>.</span>dev</a>
+    <ul class="menu">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="sobre.html">Sobre</a></li>
+      <li><a href="servico.html">Serviços</a></li>
+      <li><a href="contato.html" class="ativo">Contato</a></li>
+    </ul>
+  </nav>
+
+  <div class="contact-layout">
+
+    <!-- Left Info Panel -->
+    <div class="contact-info">
+      <div class="info-top">
+        <p class="info-label">Vamos conversar</p>
+        <h2 class="info-title">Solicite<br>seu<br><em>orçamento.</em></h2>
+        <p class="info-desc">Preencha o formulário com os detalhes do seu projeto. Tentarei responder o mais rápido possícel.</p>
+      </div>
+      <div class="info-bottom">
+        <p>GitHub</p>
+        <a href="https://github.com/THandrey/SI1N-CSW2026-1" target="_blank">THandrey ↗</a>
+      </div>
+    </div>
+
+    <!-- Right Form -->
+    <div class="contact-form-wrap">
+      <h2 class="form-title">Formulário de Serviços</h2>
+
+      <form action="#" method="post">
+
+        <div class="field-group">
+          <div class="field">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="tel">Telefone</label>
+          <input type="tel" id="tel" name="telefone" placeholder="(00) 00000-0000">
+        </div>
+
+        <div class="form-group">
+          <p class="form-group-label">Tipo de Pessoa</p>
+          <div class="radio-group">
+            <label><input type="radio" name="tipo_pessoa" value="fisica"> Pessoa Física</label>
+            <label><input type="radio" name="tipo_pessoa" value="juridica"> Pessoa Jurídica</label>
+          </div>
+          <div class="field" style="margin-top: 20px; margin-bottom: 0;">
+            <label for="cpfcnpj">CPF ou CNPJ</label>
+            <input type="text" id="cpfcnpj" name="cpfcnpj" placeholder="000.000.000-00 ou 00.000.000/0000-00">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <p class="form-group-label">Tipo de Serviço Desejado</p>
+          <div class="check-group">
+            <label><input type="checkbox" name="servico" value="1a2"> Site com 1 a 2 páginas</label>
+            <label><input type="checkbox" name="servico" value="3a5"> Site com 3 a 5 páginas</label>
+            <label><input type="checkbox" name="servico" value="5mais"> Site com 5 ou mais páginas</label>
+            <label><input type="checkbox" name="servico" value="dinamico"> Site Dinâmico</label>
+            <label><input type="checkbox" name="servico" value="avancado"> Site c/ Páginas Avançadas</label>
+          </div>
+        </div>
+
+        <div class="datetime-row">
+          <div class="field" style="margin-bottom: 0;">
+            <label for="data">Data para contato</label>
+            <input type="date" id="data" name="data" required>
+          </div>
+          <div class="field" style="margin-bottom: 0;">
+            <label for="horario">Horário preferido</label>
+            <input type="text" id="horario" name="horario" placeholder="Ex.: 15:00" required>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top: 28px;">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" placeholder="Descreva seu projeto, dúvidas ou necessidades..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">Enviar mensagem</button>
+          <button type="reset" class="btn-reset">Limpar</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>© 2026 Thiago Andrey</p>
+    <a href="https://github.com/THandrey/SI1N-CSW2026-1" target="_blank">GitHub ↗</a>
+  </footer>
+
+</body>
+</html>
